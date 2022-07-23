@@ -3,19 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   {
-    path: 'dsaf',
+    path: 'module1',
     loadChildren: () =>
       import('../module-1/module-1.module').then((m) => m.Module1Module),
   },
   // {
   //   path:'',
-  //   component: Exercise1Component
+  //   redirectTo: '',
+  //   pathMatch: 'full'
   // }
 ];
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes, {
-      enableTracing: false, // <-- debugging purposes only
+      // enableTracing: false, // <-- debugging purposes only
     }),
   ],
   exports: [RouterModule],

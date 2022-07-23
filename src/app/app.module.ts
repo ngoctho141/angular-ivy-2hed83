@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
-import { Module1Module } from './module-1/module-1.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import {ContextMenuModule} from 'primeng/contextmenu';
+
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, Module1Module, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ContextMenuModule],
   declarations: [AppComponent, HelloComponent],
   bootstrap: [AppComponent],
 })
