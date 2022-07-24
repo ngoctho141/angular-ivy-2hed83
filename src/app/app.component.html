@@ -2,5 +2,8 @@
 <p>
   Start editing to see some magic happen :)
 </p>
+<button (click)="changeDiagram()" name="Change Diagram">Change Diagram</button>
+<button (click)="changeDiagramName()" name="Change Diagram Name">Change Name</button>
 <p-tabMenu [model]="items" [activeItem]="items[1]"></p-tabMenu>
 <router-outlet></router-outlet>
+<div id="chart-container"></div>

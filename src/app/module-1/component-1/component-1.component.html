@@ -1,3 +1,8 @@
-<p>
-component-1 works!
-</p>
+<h5>Diagram summary</h5>
+<p>{{diagram.id}}</p>
+<p>{{diagram.diagramHeader}}</p>
+<p>{{diagram.spec}}</p>
+
+<p-dropdown [options]="colors" [(ngModel)]="selectedColor" placeholder = "Select a color" optionLabel="value"></p-dropdown>
+
+{{selectedColor | json}}

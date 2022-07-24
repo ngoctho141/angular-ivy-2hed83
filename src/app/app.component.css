@@ -1,3 +1,6 @@
 p {
   font-family: Lato;
 }
+#chart-container{
+  height: 1000px;
+}
