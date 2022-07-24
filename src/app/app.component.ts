@@ -44,8 +44,8 @@ export class AppComponent implements AfterViewInit {
     ];
   }
 
-  changeDiagram() {
-    this.objService.getObjStorage().next(this.overviewDiagram);
+  resetDiagram() {
+    this.objService.getObjStorage().next(myDiagram);
     console.log("Button clicked!!");
   }
 
