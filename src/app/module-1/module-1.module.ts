@@ -4,10 +4,11 @@ import { Module1RoutingModule } from './module-1-routing/module-1-routing.module
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component2Component } from './component-2/component-2.component';
 
 @NgModule({
   imports: [Module1RoutingModule, FormsModule, DropdownModule, CommonModule],
-  declarations: [Component1Component],
+  declarations: [Component1Component, Component2Component],
   exports:[
   ]
 })

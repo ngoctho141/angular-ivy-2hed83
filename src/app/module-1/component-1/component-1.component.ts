@@ -17,28 +17,28 @@ export class Component1Component implements OnInit {
     {value:'green'},
     {value:'blue'}
     ];
-  _selectedColor:{value: string} = this.colors[1];
-
-  get selectedColor(){
-    return this._selectedColor;
-  }
-
-  set selectedColor(event){
-    // console.log(event);
-    this._selectedColor = event;
-    let modifiedOption: EChartsOption;
-    const optionService$ = this.objService.getOptionStorage();
-    optionService$.pipe(take(1)).subscribe(opt=>{
-      console.log("XXXXX", opt);
-      console.log("XXXXX", this.selectedColor);
-      modifiedOption = opt;
-      modifiedOption.color = this.selectedColor.value;
-    }, undefined, ()=>{
-      console.log("this observable closed");
-      optionService$.next(modifiedOption);
-    })
-  }
-  diagram: Diagram;
+    _selectedColor:{value: string} = this.colors[1];
+    
+    get selectedColor(){
+      return this._selectedColor;
+    }
+    
+    set selectedColor(event){
+      console.log(event);
+      this._selectedColor = event;
+      let modifiedOption: EChartsOption;
+      const optionService$ = this.objService.getOptionStorage();
+      optionService$.pipe(take(1)).subscribe(opt=>{
+        console.log("XXXXX", opt);
+        console.log("XXXXX", this.selectedColor);
+        modifiedOption = opt;
+        modifiedOption.color = this.selectedColor.value;
+      }, undefined, ()=>{
+        console.log("this observable closed");
+        optionService$.next(modifiedOption);
+      })
+    }
+    diagram: Diagram;
   constructor(private route: ActivatedRoute, private router: Router, private objService: SendObjectService) { 
     console.log("Service id at component1 component: ", objService.randNum);
 
