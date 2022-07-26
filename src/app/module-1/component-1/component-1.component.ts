@@ -24,7 +24,7 @@ export class Component1Component implements OnInit {
     }
     
     set selectedColor(event){
-      this.updateOption(event, this._selectedColor, this.updateColor);
+      this.updateOption(event, this._selectedColor.value, this.updateColor);
     }
 
     updateOption(updateVal: any, valToUpdate:any,callback:(modifiedOption: EChartsOption, updateValue: any)=>void){
@@ -36,7 +36,7 @@ export class Component1Component implements OnInit {
         /*   console.log("XXXXX", opt);
         console.log("XXXXX", this.selectedColor); */
         modifiedOption = Object.assign(modifiedOption, opt);
-        callback(modifiedOption, valToUpdate.value);
+        callback(modifiedOption, valToUpdate);
         console.log('modifiedOption = ', modifiedOption);
       }, undefined, ()=>{
         console.log("this observable closed, modifiedOption = ",modifiedOption);
