@@ -38,7 +38,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
               "extractCss": true,
@@ -47,6 +47,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+              "development":{
+                "optimization": false,
+                "sourceMap": true
             }
           }
         },
@@ -59,6 +63,12 @@
           "configurations": {
             "production": {
               "browserTarget": "demo:build:production"
+            },
+            "development": {
+              "browserTarget": "demo:build:development"
+            },
+            "defaultConfiguration": {
+              "browserTarget": "demo:build:development"
             }
           }
         },

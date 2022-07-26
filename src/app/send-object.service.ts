@@ -25,7 +25,7 @@ export class SendObjectService {
     series: [
       {
         name: 'sales',
-        type: 'bar',
+        type: 'line',
         data: [5, 20, 36, 10, 10, 20]
       }
     ]

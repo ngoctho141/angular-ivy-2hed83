@@ -64,6 +64,7 @@ export class Component1Component implements OnInit {
     updateSmoothness(modifiedOption: EChartsOption, smoothness:number){
       // if(typeof modifiedOption.series === "LineSeriesOption")
       if(Array.isArray(modifiedOption.series) && modifiedOption.series[0].type === 'line'){
+        debugger
         let s = modifiedOption.series[0] as LineSeriesOption;
         s.smooth = +smoothness;
         console.log("after update smoothness, modifiedOption = ", modifiedOption);
