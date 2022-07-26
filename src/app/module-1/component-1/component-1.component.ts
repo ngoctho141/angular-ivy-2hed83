@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SendObjectService } from 'src/app/send-object.service';
 import {take} from 'rxjs/operators';
 import { Diagram } from 'src/app/app.component';
-import { EChartsOption } from 'echarts';
+import { EChartsOption, LineSeriesOption } from 'echarts';
 
 @Component({
   selector: 'app-component-1',
@@ -27,25 +27,28 @@ export class Component1Component implements OnInit {
       this.updateOption(event, this._selectedColor, this.updateColor);
     }
 
-    updateOption(updateVal: any, valToUpdate:any,callback:(option:EChartsOption, modifiedOption: EChartsOption, updateValue: any)=>void){
+    updateOption(updateVal: any, valToUpdate:any,callback:(modifiedOption: EChartsOption, updateValue: any)=>void){
       // console.log(event);
       valToUpdate = updateVal;
-      let modifiedOption: EChartsOption;
+      let modifiedOption: EChartsOption = {};
       const optionService$ = this.objService.getOptionStorage();
       optionService$.pipe(take(1)).subscribe(opt=>{
         /*   console.log("XXXXX", opt);
         console.log("XXXXX", this.selectedColor); */
-        callback(opt,modifiedOption, valToUpdate.value);
+        modifiedOption = Object.assign(modifiedOption, opt);
+        callback(modifiedOption, valToUpdate.value);
+        console.log('modifiedOption = ', modifiedOption);
       }, undefined, ()=>{
-        // console.log("this observable closed");
+        console.log("this observable closed, modifiedOption = ",modifiedOption);
         optionService$.next(modifiedOption);
       })
     }
 
-    updateColor(opt: EChartsOption, modifiedOption: EChartsOption, color:string){
-      console.log("Updated color");
-        modifiedOption = opt;
-        modifiedOption.color = color;
+    updateColor(modifiedOption: EChartsOption, color:string){
+      // Object.assign(modifiedOption, opt); // also worked.
+      // modifiedOption = opt; // fehler, weil address changed
+      modifiedOption.color = color;
+      console.log("Updated color. ", ", modifiedOption = ", modifiedOption);
     }
     _val:number;
 
@@ -54,12 +57,17 @@ export class Component1Component implements OnInit {
     } 
 
     set val(event){
-      // this.updateOption(event, this._val, this.updateSmoothness);
+      console.log("update Smooth: event = ", event);
+      this.updateOption(event, this._val, this.updateSmoothness);
     }
 
-    updateSmoothness(opt:EChartsOption, modifiedOption: EChartsOption, smoothness:number){
-      modifiedOption = opt;
-      modifiedOption.smooth = smoothness;
+    updateSmoothness(modifiedOption: EChartsOption, smoothness:number){
+      // if(typeof modifiedOption.series === "LineSeriesOption")
+      if(Array.isArray(modifiedOption.series) && modifiedOption.series[0].type === 'line'){
+        let s = modifiedOption.series[0] as LineSeriesOption;
+        s.smooth = +smoothness;
+        console.log("after update smoothness, modifiedOption = ", modifiedOption);
+      }
     }
 
     diagram: Diagram;
