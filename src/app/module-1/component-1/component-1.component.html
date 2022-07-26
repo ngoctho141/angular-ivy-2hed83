@@ -5,4 +5,7 @@
 
 <p-dropdown [options]="colors" [(ngModel)]="selectedColor" placeholder = "Select a color" optionLabel="value"></p-dropdown>
 
+<div p-mt-3>
+    <p-slider [(ngModel)]="val" [min]="0" [max]="1"></p-slider>
+</div>
 {{selectedColor | json}}

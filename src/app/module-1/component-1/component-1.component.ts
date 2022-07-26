@@ -17,27 +17,51 @@ export class Component1Component implements OnInit {
     {value:'green'},
     {value:'blue'}
     ];
-    _selectedColor:{value: string} = this.colors[1];
+    _selectedColor:{value: string};
     
     get selectedColor(){
       return this._selectedColor;
     }
     
     set selectedColor(event){
-      console.log(event);
-      this._selectedColor = event;
+      this.updateOption(event, this._selectedColor, this.updateColor);
+    }
+
+    updateOption(updateVal: any, valToUpdate:any,callback:(option:EChartsOption, modifiedOption: EChartsOption, updateValue: any)=>void){
+      // console.log(event);
+      valToUpdate = updateVal;
       let modifiedOption: EChartsOption;
       const optionService$ = this.objService.getOptionStorage();
       optionService$.pipe(take(1)).subscribe(opt=>{
-        console.log("XXXXX", opt);
-        console.log("XXXXX", this.selectedColor);
-        modifiedOption = opt;
-        modifiedOption.color = this.selectedColor.value;
+        /*   console.log("XXXXX", opt);
+        console.log("XXXXX", this.selectedColor); */
+        callback(opt,modifiedOption, valToUpdate.value);
       }, undefined, ()=>{
-        console.log("this observable closed");
+        // console.log("this observable closed");
         optionService$.next(modifiedOption);
       })
     }
+
+    updateColor(opt: EChartsOption, modifiedOption: EChartsOption, color:string){
+      console.log("Updated color");
+        modifiedOption = opt;
+        modifiedOption.color = color;
+    }
+    _val:number;
+
+    get val(){
+      return this._val;
+    } 
+
+    set val(event){
+      // this.updateOption(event, this._val, this.updateSmoothness);
+    }
+
+    updateSmoothness(opt:EChartsOption, modifiedOption: EChartsOption, smoothness:number){
+      modifiedOption = opt;
+      modifiedOption.smooth = smoothness;
+    }
+
     diagram: Diagram;
   constructor(private route: ActivatedRoute, private router: Router, private objService: SendObjectService) { 
     console.log("Service id at component1 component: ", objService.randNum);
@@ -53,6 +77,7 @@ export class Component1Component implements OnInit {
       this.diagram = diag;
       console.log(this.diagram);
     }
+
     )
   }
 
