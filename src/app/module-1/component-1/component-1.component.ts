@@ -24,7 +24,7 @@ export class Component1Component implements OnInit {
     }
     
     set selectedColor(event){
-      this.updateOption(event, this._selectedColor.value, this.updateColor);
+      this.updateOption(event, this._selectedColor, this.updateColor);
     }
 
     updateOption(updateVal: any, valToUpdate:any,callback:(modifiedOption: EChartsOption, updateValue: any)=>void){
@@ -44,10 +44,10 @@ export class Component1Component implements OnInit {
       })
     }
 
-    updateColor(modifiedOption: EChartsOption, color:string){
+    updateColor(modifiedOption: EChartsOption, color:any){
       // Object.assign(modifiedOption, opt); // also worked.
       // modifiedOption = opt; // fehler, weil address changed
-      modifiedOption.color = color;
+      modifiedOption.color = color.value;
       console.log("Updated color. ", ", modifiedOption = ", modifiedOption);
     }
     _val:number;

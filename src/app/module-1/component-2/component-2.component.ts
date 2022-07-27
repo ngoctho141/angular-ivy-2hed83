@@ -18,7 +18,7 @@ export class Component2Component implements OnInit {
     {value:'bar'}
   ]
 
-  _selectedType = this.types[2];
+  _selectedType;
 
   get selectedType(){
     return this._selectedType;
