@@ -1,6 +1,7 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
+<p *ngFor="let filteredFile of filteredFiles; let i = index;">
+  <ng-container *ngIf="i === 0">
+    {{filteredFile |json}}
+  </ng-container>
 </p>
 
 <router-outlet></router-outlet>
