@@ -1,5 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import {MenuItem} from 'primeng/api';
+import * as $ from 'jquery';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -143,5 +144,10 @@ export class AppComponent  {
                icon:'pi pi-fw pi-power-off'
             }
          ];
+         $(document).ready(function(){
+            $('#').hover(($event)=>{
+                console.log($event);
+            })
+         });
     }
 }
